@@ -1,5 +1,4 @@
 #!/bin/bash
 
 mkdir -p dist
-cp app/bundle.js dist/
-uglifyjs -m --screw-ie8 bundle.js > bundle.min.js
+uglifyjs -m --screw-ie8 app/bundle.js > dist/bundle.min.js
