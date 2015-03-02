@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# install package deps
+npm install
+# install grunt globally
+npm install -g grunt-cli
+# start watch server
+grunt

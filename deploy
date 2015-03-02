@@ -1,0 +1,5 @@
+#!/bin/bash
+
+mkdir -p dist
+cp app/bundle.js dist/
+uglifyjs -m --screw-ie8 bundle.js > bundle.min.js

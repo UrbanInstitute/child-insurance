@@ -1,0 +1,55 @@
+html, body {
+  width: 100%;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+
+.urban-toggle {
+  display: block;
+  width: 100px;
+  background-color: #ccc;
+  padding: 3px;
+}
+
+.urban-toggle .option {
+  display: inline-block;
+  width: 44px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.urban-toggle .option.selected {
+  background-color: #000;
+  color: #fff;
+}
+
+
+.urban-button, .urban-toggle, label {
+  font-size: 12px;
+}
+
+.urban-button {
+  display: inline-block;
+  background-color: #ccc;
+  text-align: center;
+  padding: 3px 5px;
+}
+
+.urban-button:hover {
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+}
+
+@media(max-width: 978px) {
+  .urban-button, .urban-toggle, label {
+    font-size: 10px;
+  }
+}
