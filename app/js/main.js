@@ -23,11 +23,23 @@ var defaults = {
 var model = events(defaults);
 
 var stateChart = new ColumnChart({
-  "container" : d3.select("#states")
+  "container" : d3.select("#states"),
+  "title" : "MARKETPLACE",
+  "brackets" : [
+    {
+      "extent" : [0,2],
+      "title" : "FEDERAL MARKET PLACE",
+    },
+    {
+      "extent" : [2, 4],
+      "title" : "STATE MARKETPLACE"
+    }
+  ]
 });
 
 var incomeChart = new ColumnChart({
-  "container" : d3.select("#incomes")
+  "container" : d3.select("#incomes"),
+  "title" : "INCOME LEVEL"
 });
 
 
@@ -60,8 +72,6 @@ loadCSVs([
   }
 
 });
-
-
 
 
 function lineData(chart, data) {

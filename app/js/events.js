@@ -9,9 +9,11 @@ function controller(defaults) {
   var king_toggle = d3.selectAll('#king-toggle .option');
   var scenario_toggle = d3.selectAll('#scenarios .urban-button');
 
+  // set buttons to given defaults
   updateKing(model);
   updateScenario(model);
 
+  // register button click events
   king_toggle.on('click', function() {
     model.king = this.id;
     updateKing(model);
