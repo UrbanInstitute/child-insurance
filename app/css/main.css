@@ -11,6 +11,45 @@ html {
 }
 
 
+#content {
+  min-width: 752px;
+}
+
+#title {
+  margin-top: 20px;
+}
+
+#states, #incomes {
+  display: block;
+  height: 250px;
+}
+
+#states .bar {
+  fill : rgb(29, 175, 236);
+}
+
+#incomes .bar {
+  fill : rgb(254, 202, 48);
+}
+
+path.line {
+  stroke : #ccc;
+  stroke-width: 2px;
+  fill : none;
+}
+
+text.line-title {
+  font-size: 10px;
+}
+
+text.axis-text {
+  font-size: 10px;
+}
+
+label {
+  margin-top: 15px;
+}
+
 .urban-toggle {
   display: block;
   width: 100px;
@@ -25,7 +64,8 @@ html {
   cursor: pointer;
 }
 
-.urban-toggle .option.selected {
+.urban-toggle .option.selected,
+.urban-button.selected {
   background-color: #000;
   color: #fff;
 }
@@ -40,11 +80,6 @@ html {
   background-color: #ccc;
   text-align: center;
   padding: 3px 5px;
-}
-
-.urban-button:hover {
-  background-color: #000;
-  color: #fff;
   cursor: pointer;
 }
 

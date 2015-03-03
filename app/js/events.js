@@ -1,0 +1,45 @@
+
+var d3 = require('../lib/d3.js');
+
+function controller(defaults) {
+
+  var model = defaults || {};
+
+  var dispatch = d3.dispatch('change');
+  var king_toggle = d3.selectAll('#king-toggle .option');
+  var scenario_toggle = d3.selectAll('#scenarios .urban-button');
+
+  updateKing(model);
+  updateScenario(model);
+
+  king_toggle.on('click', function() {
+    model.king = this.id;
+    updateKing(model);
+    dispatch.change(model);
+  });
+
+  scenario_toggle.on('click', function() {
+    model.scenario = this.id;
+    updateScenario(model);
+    dispatch.change(model);
+  });
+
+  function updateKing(model) {
+    king_toggle.classed('selected', function() {
+      return model.king === this.id;
+    });
+  }
+
+  function updateScenario(model) {
+    scenario_toggle.classed('selected', function() {
+      return model.scenario === this.id;
+    });
+  }
+
+  return {
+    on : dispatch.on.bind(dispatch),
+    get : function() { return model; }
+  };
+}
+
+module.exports = controller;

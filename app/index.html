@@ -9,7 +9,7 @@
 <body>
   <div id="content">
     <div class="container">
-      <div class="row">
+      <div class="row" id="title">
         <h2>Lorem ipsum dolor.</h2>
       </div>
       <div class="row">
@@ -25,9 +25,9 @@
           <label for=".urban-toggle">
             King vs Burwell enacted
           </label>
-          <div class="urban-toggle">
-            <div class="option">n</div>
-            <div class="option selected">y</div>
+          <div class="urban-toggle" id="king-toggle">
+            <div id="False" class="option">n</div>
+            <div id="True" class="option">y</div>
           </div>
         </div>
         <div class="nine columns">
@@ -35,15 +35,21 @@
             Scenarios
           </label>
           <div id="scenarios">
-            <div class="urban-button">Current Funding</div>
-            <div class="urban-button">No Separate Child's Health Insurance Program</div>
-            <div class="urban-button">No Maintenance of Effort</div>
+            <div class="urban-button" id="current">
+              Current Funding
+            </div>
+            <div class="urban-button" id="noschip">
+              No Separate Child's Health Insurance Program
+            </div>
+            <div class="urban-button" id="nomoe">
+              No Maintenance of Effort
+            </div>
           </div>
         </div>
       </div>
       <div class="row">
-        <div id="market-place"></div>
-        <div id="income-level"></div>
+        <div class="six columns"><div id="states"></div></div>
+        <div class="six columns"><div id="incomes"></div></div>
       </div>
     </div>
   </div>
