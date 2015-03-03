@@ -1,8 +1,23 @@
 import pandas as pd
-import json
+import re
 
-with open('../data/weights.json') as weightjson:
-  weights = json.load(weightjson)
+weights = {
+  "ffmschip" : 0.55,
+  "ffmnoschip" : 0.11,
+  "sbmschip" : 0.17,
+  "sbmnoschip" : 0.18,
+  "1" : 0.377,
+  "2" : 0.116,
+  "3" : 0.261,
+  "4" : 0.246
+}
+
+col_groups = {
+  "1" : "<138%",
+  "2" : "138-200%",
+  "3" : "200-400%",
+  "4" : ">400%"
+}
 
 scenarios = {
   "noaca" :       {"aca" : False, "king" : False, "scenario" : "current"},
@@ -25,6 +40,7 @@ def csvToDF(csvfile):
     r['scenario'] = scenarios[s]['scenario']
     g = str(r['group'])
     r['weight'] = weights[g] if g != "all" else 1
+    r['col_name'] = col_groups[g] if g in col_groups else None
 
   return pd.DataFrame(records)
 
@@ -33,6 +49,9 @@ if __name__ == '__main__':
   states = csvToDF('../data/stategroups.csv')
   incomes = csvToDF('../data/incomegroups.csv')
   states['chart'] = 'states'
+  states['schip'] = states['group'].apply(
+    lambda x : re.match('.*noschip.*', x) == None if x else False
+  )
   incomes['chart'] = 'incomes'
   states.to_csv('../data/states.csv', index=False)
   incomes.to_csv('../data/incomes.csv', index=False)

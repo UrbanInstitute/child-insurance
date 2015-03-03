@@ -1,4 +1,26 @@
 #!/bin/bash
 
+DEPLOY="B:/bsouthga/child-insurance/"
+
 mkdir -p dist
-uglifyjs -m --screw-ie8 app/bundle.js > dist/bundle.min.js
+
+echo uglifying...
+uglifyjs -m --screw-ie8 app/bundle.js > dist/bundle.js
+cssmin app/bundle.css > dist/bundle.css
+
+echo copying data...
+cp -r app/data dist/data
+cp app/index.html dist/index.html
+
+echo creating tarball...
+cd dist/
+tar czfP ../tarball.tar.gz ./
+
+echo copying tarball...
+cd ../
+rm -rf dist/
+mv tarball.tar.gz "$DEPLOY"
+
+echo unzipping...
+cd "$DEPLOY"
+tar -xzf tarball.tar.gz

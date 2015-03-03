@@ -15,41 +15,78 @@ var ColumnChart = require('./column.js'),
 
 var defaults = {
   'king' : "False",
-  "scenario" : "current",
+  "scenario" : "noschip",
   "aca" : "True"
 };
 
-// model starting with defaults
-var model = events(defaults);
+loadCSVs(['data/states.csv', 'data/incomes.csv'], ready);
 
-var stateChart = new ColumnChart({
-  "container" : d3.select("#states"),
-  "title" : "MARKETPLACE",
-  "brackets" : [
-    {
-      "extent" : [0,2],
-      "title" : "FEDERAL MARKET PLACE",
-    },
-    {
-      "extent" : [2, 4],
-      "title" : "STATE MARKETPLACE"
-    }
-  ]
-});
-
-var incomeChart = new ColumnChart({
-  "container" : d3.select("#incomes"),
-  "title" : "INCOME LEVEL"
-});
-
-
-loadCSVs([
-    'data/states.csv',
-    'data/incomes.csv'
-  ], function(e, data) {
+function ready(e, data) {
 
   var states = data['data/states.csv'];
   var incomes = data['data/incomes.csv'];
+
+  // model starting with defaults
+  var model = events(defaults);
+
+  var stateChart = new ColumnChart({
+    "container" : d3.select("#states"),
+    "title" : "MARKETPLACE",
+    "domain" : [
+      0, d3.max(states, function(d) {return Number(d.rate);})*1.1
+    ],
+    "margin" : {"top" : 65},
+    "brackets" : [
+      {
+        "extent" : [0,2],
+        "title" : "FEDERAL MARKET PLACE",
+      },
+      {
+        "extent" : [2, 4],
+        "title" : "STATE MARKETPLACE"
+      }
+    ],
+    "legend" : {
+      "category" : "schip",
+      "values" : {
+        "True" : {
+          "color" : "rgb(29, 175, 236)",
+          "text" : "States with a separate child's health insurance program"
+        },
+        "False" : {
+          "color" : "rgb(27,109,142)",
+          "text" : "States without a separate child's health insurance program"
+        }
+      }
+    },
+    "xAxisRows" : [
+      {
+        "format" : d3.format(".1%"),
+        "variable" : "weight",
+        "text" : 'Share of all children'
+      }
+    ]
+  });
+
+  var incomeChart = new ColumnChart({
+    "container" : d3.select("#incomes"),
+    "title" : "INCOME LEVEL",
+    "domain" : [
+      0, d3.max(incomes, function(d) {return Number(d.rate);})*1.1
+    ],
+    "xAxisRows" : [
+      {
+        "format" : d3.format(".1%"),
+        "variable" : "weight",
+        "text" : 'Share of all children'
+      },
+      {
+        "variable" : "col_name",
+        "text" : '% above FPL'
+      }
+    ]
+  });
+
 
   update(defaults);
 
@@ -71,7 +108,7 @@ loadCSVs([
     );
   }
 
-});
+}
 
 
 function lineData(chart, data) {

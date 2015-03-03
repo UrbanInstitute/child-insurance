@@ -10,6 +10,7 @@ function ColumnChart(opts) {
   this.opts = opts;
   this.container = opts.container;
   this.rendered = false;
+  this.xAxisText = [];
 }
 
 
@@ -64,7 +65,16 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
 
   var con = this.container;
   var bb = con.node().getBoundingClientRect();
-  var m = this.margin = { top: 10, right: 10, bottom: 40, left: 80 };
+  var m = { top: 10, right: 10, bottom: 40, left: 80 };
+
+  if (this.opts.margin) {
+    d3.entries(this.opts.margin).forEach(function(e) {
+      m[e.key] = e.value;
+    });
+  }
+  this.margin = m;
+
+
   var w = this.width = bb.width - m.left - m.right;
   var h = this.height = bb.height - m.top - m.bottom;
 
@@ -76,7 +86,7 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
 
   var y = this.y = d3.scale.linear()
     .range([h, 0])
-    .domain([0, 0.2]);
+    .domain(this.opts.domain || [0, 0.2]);
 
   // calculate widths for bar chart
   var barWidths = this.barWidths = bar_data.map(function(r) {
@@ -96,36 +106,19 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
     .attr('class', 'bar')
     .attr('width', function(d, i) {return (barWidths[i] - 2) + 'px';});
 
-  var pct = d3.format('.1%');
-  var maxTextHeight = 0;
-  this.bars.append('text')
-    .attr('class', 'axis-text')
-    .text(function(d) { return pct(Number(d.weight)); })
-    .attr('y', function() {
-      var t_height = this.getBBox().height;
-      if (t_height > maxTextHeight) maxTextHeight = t_height;
-      return t_height + h;
-    })
-    .attr('x', function(d, i) {
-      var bb = this.getBBox();
-      return barWidths[i]/2 - bb.width/2;
-    });
-  this.maxTextHeight = maxTextHeight;
+  // reset starting point for x axis text
+  this.maxTextHeight = 0;
 
-  svg.append('text')
-    .attr('class', 'line-title')
-    .text('Share of all children')
-    .attr('y', h + maxTextHeight)
-    .attr('x', function() {
-      return 20 - this.getBBox().width;
-    });
+  // add all the rows of x axis text
+  this.opts.xAxisRows.forEach(
+    this.addXAxisText.bind(this)
+  );
 
-
-  svg.append('text')
+  var chart_title = this.chart_title = svg.append('text')
     .attr('class', 'chart-title')
     .text(this.opts.title)
     .attr('y', function() {
-      return this.getBBox().height;
+      return this.getBBox().height - m.top;
     })
     .attr('x', function() {
       return (w - this.getBBox().width) / 2;
@@ -138,6 +131,10 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
     this.addLine(line_data[title], title);
   }
 
+  if (this.opts.legend) {
+    this.addLegend(this.opts.legend);
+  }
+
   if (this.opts.brackets) {
     this.opts.brackets.forEach(function(b) {
       self.axisBracket(b.extent, b.title);
@@ -145,6 +142,43 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
   }
 
   return this.update(bar_data);
+};
+
+
+/*
+  add a row of x axis text
+*/
+ColumnChart.prototype.addXAxisText = function(config) {
+
+  var format = config.format || function(d) {return d;};
+  var barWidths = this.barWidths;
+  var maxTextHeight = 0;
+  var h = this.height + this.maxTextHeight;
+
+  this.bars.append('text')
+    .attr('class', 'axis-text')
+    .text(function(d) { return format(d[config.variable]); })
+    .attr('y', function() {
+      var t_height = this.getBBox().height;
+      if (t_height > maxTextHeight) maxTextHeight = t_height;
+      return t_height + h;
+    })
+    .attr('x', function(d, i) {
+      var bb = this.getBBox();
+      return barWidths[i]/2 - bb.width/2;
+    });
+
+  this.svg.append('text')
+    .attr('class', 'line-title')
+    .text(config.text)
+    .attr('y', h + maxTextHeight)
+    .attr('x', function() {
+      return 20 - this.getBBox().width;
+    });
+
+  // keep track of bottom of x axis text
+  this.maxTextHeight += maxTextHeight + 5;
+
 };
 
 
@@ -201,11 +235,58 @@ ColumnChart.prototype.barPad = function(barIndex) {
 };
 
 
+ColumnChart.prototype.addLegend = function(legend_opts) {
+
+    var cat = legend_opts.category;
+    var vals = legend_opts.values;
+    var svg = this.svg;
+    // fill the bars with the correct color
+    this.bars.select('rect')
+      .style('fill', function(d) {
+        return vals[d[cat]].color;
+      });
+    // append legend key
+    var titlebb = this.chart_title.node().getBBox();
+
+    var legend = svg.append('g')
+      .attr('transform',
+        'translate(' +
+          (-this.margin.left) + ',' +
+          (titlebb.height + titlebb.y + 10) +
+        ')'
+      );
+
+    var legend_rect_size = 15;
+
+    // convert vals to array
+    d3.values(vals).forEach(function(val, i) {
+        var entry = legend.append('g')
+          .attr('transform',
+            'translate(0,' + (legend_rect_size + 5)*i + ')'
+          );
+        entry.append('rect')
+          .attr('width', legend_rect_size)
+          .attr('height', legend_rect_size)
+          .style('fill', val.color);
+
+        entry.append('text')
+          .attr('class', 'legend-text')
+          .attr('x', legend_rect_size * 1.5)
+          .text(val.text)
+          .attr('y', function() {
+            var bb = this.getBBox();
+            return legend_rect_size/2 + bb.height/2;
+          });
+      });
+
+};
+
+
 ColumnChart.prototype.axisBracket = function(barIndexRange, text) {
 
   var svg = this.svg;
   var pad = 5;
-  var h = this.height + this.maxTextHeight + 3;
+  var h = this.height + this.maxTextHeight;
   var extent = barIndexRange.map(this.barPad.bind(this));
 
   // constrict range of bracket

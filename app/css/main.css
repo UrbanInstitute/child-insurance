@@ -18,7 +18,7 @@ html {
 
 #states, #incomes {
   display: block;
-  height: 250px;
+  height: 300px;
 }
 
 #states .bar {
@@ -27,6 +27,14 @@ html {
 
 #incomes .bar {
   fill : rgb(254, 202, 48);
+}
+
+#charts {
+  margin-top: 20px;
+}
+
+#embed {
+  margin-top: 20px;
 }
 
 path.line {
@@ -63,6 +71,10 @@ text.bar-label {
 text.bracket-title {
   font-size: 10px;
   font-weight: bold;
+}
+
+text.legend-text {
+  font-size: 11px;
 }
 
 label {
