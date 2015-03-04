@@ -46,11 +46,11 @@ function ready(e, data) {
     "brackets" : [
       {
         "extent" : [0,2],
-        "title" : "FEDERAL MARKET PLACE",
+        "title" : "Federal Marketplace",
       },
       {
         "extent" : [2, 4],
-        "title" : "STATE MARKETPLACE"
+        "title" : "State Marketplace"
       }
     ],
     "legend" : {
@@ -70,7 +70,7 @@ function ready(e, data) {
       {
         "format" : d3.format(".1%"),
         "variable" : "weight",
-        "text" : 'Share of all children'
+        "text" : 'of all children'
       }
     ]
   });
@@ -86,11 +86,11 @@ function ready(e, data) {
       {
         "format" : d3.format(".1%"),
         "variable" : "weight",
-        "text" : 'Share of all children'
+        "text" : 'of all children'
       },
       {
         "variable" : "col_name",
-        "text" : '% above FPL'
+        "text" : 'FPL'
       }
     ]
   });

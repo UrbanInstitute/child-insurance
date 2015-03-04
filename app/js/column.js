@@ -197,7 +197,10 @@ ColumnChart.prototype.addXAxisText = function(config) {
 
   this.bars.append('text')
     .attr('class', 'axis-text')
-    .text(function(d) { return format(d[config.variable]); })
+    .text(function(d, i) {
+      var t = !i ? (" " + config.text) : "";
+      return format(d[config.variable]) + t;
+    })
     .attr('y', function() {
       var t_height = this.getBBox().height;
       if (t_height > maxTextHeight) maxTextHeight = t_height;
@@ -206,14 +209,6 @@ ColumnChart.prototype.addXAxisText = function(config) {
     .attr('x', function(d, i) {
       var bb = this.getBBox();
       return barWidths[i]/2 - bb.width/2;
-    });
-
-  this.svg.append('text')
-    .attr('class', 'line-title')
-    .text(config.text)
-    .attr('y', h + maxTextHeight)
-    .attr('x', function() {
-      return 20 - this.getBBox().width;
     });
 
   // keep track of bottom of x axis text
