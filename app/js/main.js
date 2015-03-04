@@ -98,17 +98,13 @@ function ready(e, data) {
 
   update(defaults);
 
-
   var pymChild = new pym.Child({
-    renderCallback: function() {
-      update(model.get(), true);
-    }
+    renderCallback: render
   });
 
+  d3.select(window).on('resize', render);
+
   model.on('change', update);
-
-
-
 
   d3.select('#embed').on('click', function() {
     var show = !tooltip.classed('embed-show');
@@ -119,7 +115,9 @@ function ready(e, data) {
   });
 
 
-
+  function render() {
+    update(model.get(), true);
+  }
 
   function update(model_state, rerender) {
     var method = rerender ? 'render' : 'update';
