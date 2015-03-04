@@ -94,8 +94,6 @@ function tooltip() {
       x = y = -9999;
     }
 
-    console.log(x, y);
-
     // absolutely position tooltip
     var pos = {
       'top' : y + 'px',
