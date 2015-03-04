@@ -38,7 +38,7 @@ function ready(e, data) {
   var stateChart = new ColumnChart({
     "container" : d3.select("#states"),
     "tooltip" : tooltip,
-    "title" : "MARKETPLACE",
+    "title" : "Marketplace",
     "domain" : [
       0, max_max*1.1
     ],
@@ -78,7 +78,7 @@ function ready(e, data) {
   var incomeChart = new ColumnChart({
     "container" : d3.select("#incomes"),
     "tooltip" : tooltip,
-    "title" : "INCOME LEVEL",
+    "title" : "Income Level",
     "domain" : [
       0, max_max*1.1
     ],

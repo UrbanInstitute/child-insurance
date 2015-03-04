@@ -11,17 +11,29 @@ html {
   box-sizing: inherit;
 }
 
+ul li {
+  list-style-type: disc;
+  margin: 0px;
+}
 
 #content {
-  padding: 30px;
+  padding: 10px;
 }
+
+#content h5 {
+  margin-bottom: 0px;
+}
+
+#text {
+  font-size: 10px;
+}
+
 
 #title {
   margin-top: 20px;
 }
 
 #states, #incomes {
-  display: block;
   height: 300px;
 }
 
@@ -34,11 +46,19 @@ html {
 }
 
 #charts {
+  margin : 0px;
   margin-top: 20px;
+  white-space: nowrap;
+  padding: 0px;
 }
 
 .chart {
+  white-space: normal;
+  display: inline-block;
+  margin: 0px;
   margin-bottom: 20px;
+  width: 50%;
+  padding: 0px;
 }
 
 
@@ -62,6 +82,7 @@ text.chart-title {
 }
 
 text.line-title {
+  fill : #ec008c;
   font-size: 10px;
   font-style: italic;
   font-weight: bold;
@@ -92,15 +113,19 @@ label {
 
 .urban-toggle {
   display: block;
-  width: 100px;
+  width: 100%;
+  white-space: nowrap;
 }
 
 .urban-toggle .option {
   display: inline-block;
-  width: 44px;
+  white-space: normal;
+  font-size: 12px;
+  width: 50%;
   text-align: center;
   cursor: pointer;
   margin: 0px;
+  padding: 0px;
 }
 
 .urban-toggle .option,
@@ -115,7 +140,7 @@ label {
 }
 
 
-.urban-button, .urban-toggle, label {
+.urban-button, label {
   font-size: 12px;
 }
 
@@ -127,7 +152,7 @@ label {
 
 #scenarios .urban-button {
   margin-bottom: 5px;
-  width: 60%;
+  width: 100%;
 }
 
 @media(max-width: 978px) {

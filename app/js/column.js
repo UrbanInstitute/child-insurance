@@ -67,7 +67,7 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
   var tooltip = this.opts.tooltip;
   var con = this.container;
   var bb = con.node().getBoundingClientRect();
-  var m = { top: 30, right: 10, bottom: 40, left: 80 };
+  var m = { top: 30, right: 10, bottom: 40, left: 32 };
 
   var margin_top_start = m.top;
 
@@ -99,7 +99,7 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
   var yAxis = d3.svg.axis().scale(y)
       .outerTickSize(0)
       .ticks(5)
-      .tickFormat(pct)
+      .tickFormat(percent)
       .orient("left");
 
   var yGrid = d3.svg.axis().scale(y)
@@ -164,7 +164,7 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
       return this.getBBox().height - m.top;
     })
     .attr('x', function() {
-      return (w - this.getBBox().width) / 2;
+      return -m.left;
     });
 
   for (var title in line_data) {
@@ -251,11 +251,10 @@ ColumnChart.prototype.addLine = function(line_data, text) {
       .text(text)
       .attr('y', function() {
         var bb = this.getBBox();
-        return line_points[0].y + bb.height/4;
+        return line_points[0].y - bb.height/2;
       })
       .attr('x', function() {
-        var bb = this.getBBox();
-        return -bb.width - 5;
+        return line_points[0].x;
       });
   }
 
@@ -313,8 +312,9 @@ ColumnChart.prototype.addLegend = function(legend_opts) {
 
     // center legend over chart
     var bb = legend.node().getBBox();
+    var margin = this.margin;
     legend.attr('transform',
-        'translate(' +((w-bb.width)/2) + ',' +
+        'translate(' + (-margin.left) + ',' +
           (titlebb.height + titlebb.y + 10) +
         ')'
       );
