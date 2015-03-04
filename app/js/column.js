@@ -4,6 +4,13 @@
 
 
 var d3 = require('../lib/d3.js');
+var percent = d3.format('%');
+var percent1 = d3.format('.1%');
+var pct = function(d) {
+  return d < 0.1 ? percent1(d) : percent(d);
+};
+var pop = d3.format('s');
+var dur = 300;
 
 
 function ColumnChart(opts) {
@@ -17,27 +24,28 @@ function ColumnChart(opts) {
 /*
   update bar heights and label positions
 */
-ColumnChart.prototype.update = function(bar_data, line_data) {
+ColumnChart.prototype.update = function(bar_data, line_data, no_trans) {
   bar_data = this.bar_data = bar_data || this.bar_data;
   if (!this.rendered) return this.render(bar_data, line_data);
 
   var y = this.y;
   var h = this.height;
   var barWidths = this.barWidths;
-  var pct = d3.format('%');
-  var pop = d3.format('s');
-  duration = 300;
 
-  this.bars.data(bar_data).select('.bar')
-    .transition()
-    .duration(duration)
+  var transition = function(selection) {
+    return no_trans ? selection : selection.transition().duration(dur);
+  };
+
+  transition(
+      this.bars.data(bar_data).select('.bar')
+    )
     .attr('y', function(d) { return y(Number(d.rate)); })
     .attr('height', function(d) { return h - y(Number(d.rate)); });
 
-  this.bars.select('.bar-label')
-    .text(function(d) { return pct(Number(d.rate)); })
-    .transition()
-    .duration(duration)
+  transition(
+      this.bars.select('.bar-label')
+        .text(function(d) { return pct(Number(d.rate)); })
+    )
     .attr('y', function(d) {
       var bb = this.getBBox();
       return y(Number(d.rate)) + bb.height + 2;
@@ -141,7 +149,7 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
     });
   }
 
-  return this.update(bar_data);
+  return this.update(bar_data, line_data, true);
 };
 
 

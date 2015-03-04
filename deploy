@@ -24,3 +24,4 @@ mv tarball.tar.gz "$DEPLOY"
 echo unzipping...
 cd "$DEPLOY"
 tar -xzf tarball.tar.gz
+rm tarball.tar.gz
