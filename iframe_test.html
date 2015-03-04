@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style>
+    html, body {
+      width: 100%;
+    }
+
+    #test-frame {
+      width: 50%;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="test-frame">
+    <div id="urban_iframe"></div>
+    <script type="text/javascript" src="http://datatools.urban.org/features/fha-refinance/js/vendor/pym.js"></script>
+    <script> var pymParent = new pym.Parent('urban_iframe', "app/index.html", {});</script>
+  </div>
+</body>
+</html>

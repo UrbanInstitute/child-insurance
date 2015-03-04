@@ -6,10 +6,16 @@
 var d3 = require('../lib/d3.js');
 var percent = d3.format('%');
 var percent1 = d3.format('.1%');
+
 var pct = function(d) {
   return d < 0.1 ? percent1(d) : percent(d);
 };
-var pop = d3.format('s');
+
+var pop = function(d) {
+  var v = Number(d);
+  return Math.round(v/10e4)/10 + ' million';
+};
+
 var dur = 300;
 
 
@@ -42,19 +48,6 @@ ColumnChart.prototype.update = function(bar_data, line_data, no_trans) {
     .attr('y', function(d) { return y(Number(d.rate)); })
     .attr('height', function(d) { return h - y(Number(d.rate)); });
 
-  transition(
-      this.bars.select('.bar-label')
-        .text(function(d) { return pct(Number(d.rate)); })
-    )
-    .attr('y', function(d) {
-      var bb = this.getBBox();
-      return y(Number(d.rate)) + bb.height + 2;
-    })
-    .attr('x', function(d, i) {
-      var bb = this.getBBox();
-      return barWidths[i]/2 - bb.width/2;
-    });
-
   return this;
 };
 
@@ -71,9 +64,12 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
 
   this.rendered = true;
 
+  var tooltip = this.opts.tooltip;
   var con = this.container;
   var bb = con.node().getBoundingClientRect();
-  var m = { top: 10, right: 10, bottom: 40, left: 80 };
+  var m = { top: 30, right: 10, bottom: 40, left: 80 };
+
+  var margin_top_start = m.top;
 
   if (this.opts.margin) {
     d3.entries(this.opts.margin).forEach(function(e) {
@@ -92,9 +88,37 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
     .append('g')
       .attr('transform', 'translate(' + m.left + ',' + m.top + ')');
 
+
   var y = this.y = d3.scale.linear()
     .range([h, 0])
     .domain(this.opts.domain || [0, 0.2]);
+
+  // compute margin change for domain adjustment
+  y.domain([0, y.invert(m.top - margin_top_start)]);
+
+  var yAxis = d3.svg.axis().scale(y)
+      .outerTickSize(0)
+      .ticks(5)
+      .tickFormat(pct)
+      .orient("left");
+
+  var yGrid = d3.svg.axis().scale(y)
+      .tickSize(w, 0)
+      .ticks(5)
+      .tickFormat("")
+      .orient("left");
+
+  // render y axis
+  var y_axis_g = svg.append("g")
+      .attr("class", "y axis linechart")
+      .call(yAxis);
+
+  // y grid lines
+  var y_grid_g = svg.append('g')
+    .attr('class', 'grid linechart')
+    .attr("transform", "translate(" + w + ",0)")
+    .call(yGrid);
+
 
   // calculate widths for bar chart
   var barWidths = this.barWidths = bar_data.map(function(r) {
@@ -112,7 +136,18 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
 
   this.bars.append('rect')
     .attr('class', 'bar')
-    .attr('width', function(d, i) {return (barWidths[i] - 2) + 'px';});
+    .attr('width', function(d, i) {return (barWidths[i] - 2) + 'px';})
+    .on('mouseover', function(d) {
+      tooltip
+        .text(
+          '<div>' + pct(d.rate) + ' uninsured</div>' +
+          '<div>' + pop(d.number) + ' children</div>'
+        )
+        .position(this, svg.node());
+    })
+    .on('mouseout', function() {
+      tooltip.position();
+    });
 
   // reset starting point for x axis text
   this.maxTextHeight = 0;
@@ -131,9 +166,6 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
     .attr('x', function() {
       return (w - this.getBBox().width) / 2;
     });
-
-  this.bars.append('text')
-    .attr('class', 'bar-label');
 
   for (var title in line_data) {
     this.addLine(line_data[title], title);
@@ -248,6 +280,8 @@ ColumnChart.prototype.addLegend = function(legend_opts) {
     var cat = legend_opts.category;
     var vals = legend_opts.values;
     var svg = this.svg;
+    var w = this.width;
+
     // fill the bars with the correct color
     this.bars.select('rect')
       .style('fill', function(d) {
@@ -256,13 +290,7 @@ ColumnChart.prototype.addLegend = function(legend_opts) {
     // append legend key
     var titlebb = this.chart_title.node().getBBox();
 
-    var legend = svg.append('g')
-      .attr('transform',
-        'translate(' +
-          (-this.margin.left) + ',' +
-          (titlebb.height + titlebb.y + 10) +
-        ')'
-      );
+    var legend = svg.append('g');
 
     var legend_rect_size = 15;
 
@@ -287,6 +315,14 @@ ColumnChart.prototype.addLegend = function(legend_opts) {
           });
       });
 
+
+    // center legend over chart
+    var bb = legend.node().getBBox();
+    legend.attr('transform',
+        'translate(' +((w-bb.width)/2) + ',' +
+          (titlebb.height + titlebb.y + 10) +
+        ')'
+      );
 };
 
 
@@ -310,7 +346,6 @@ ColumnChart.prototype.axisBracket = function(barIndexRange, text) {
   ];
 
   var line = d3.svg.line()
-    .interpolate('basis')
     .x(function(d) { return d.x; })
     .y(function(d) { return d.y; });
 

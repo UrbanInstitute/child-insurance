@@ -53,8 +53,8 @@ module.exports = function(grunt) {
         notify: false,
         watchTask: true,
         server: {
-          baseDir: "./app/",
-          index: "index.html"
+          baseDir: "./",
+          index: "iframe_test.html"
         }
       }
     }

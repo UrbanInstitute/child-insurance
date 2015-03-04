@@ -12,6 +12,7 @@ var d3 = require('../lib/d3.js'),
 var ColumnChart = require('./column.js'),
     loadCSVs = require('./load.js'),
     events = require('./events.js');
+    tooltip = require('./tooltip.js')();
 
 var defaults = {
   'king' : "False",
@@ -26,14 +27,20 @@ function ready(e, data) {
   var states = data['data/states.csv'];
   var incomes = data['data/incomes.csv'];
 
+  var max_max = Math.max(
+    d3.max(incomes, function(d) {return Number(d.rate);}),
+    d3.max(states, function(d) {return Number(d.rate);})
+  );
+
   // model starting with defaults
   var model = events(defaults);
 
   var stateChart = new ColumnChart({
     "container" : d3.select("#states"),
+    "tooltip" : tooltip,
     "title" : "MARKETPLACE",
     "domain" : [
-      0, d3.max(states, function(d) {return Number(d.rate);})*1.1
+      0, max_max*1.1
     ],
     "margin" : {"top" : 65},
     "brackets" : [
@@ -51,11 +58,11 @@ function ready(e, data) {
       "values" : {
         "True" : {
           "color" : "rgb(29, 175, 236)",
-          "text" : "States with a separate child's health insurance program"
+          "text" : "States with pre-existing S-CHIP program"
         },
         "False" : {
           "color" : "rgb(27,109,142)",
-          "text" : "States without a separate child's health insurance program"
+          "text" : "States without pre-existing S-CHIP program"
         }
       }
     },
@@ -70,9 +77,10 @@ function ready(e, data) {
 
   var incomeChart = new ColumnChart({
     "container" : d3.select("#incomes"),
+    "tooltip" : tooltip,
     "title" : "INCOME LEVEL",
     "domain" : [
-      0, d3.max(incomes, function(d) {return Number(d.rate);})*1.1
+      0, max_max*1.1
     ],
     "xAxisRows" : [
       {
@@ -90,11 +98,28 @@ function ready(e, data) {
 
   update(defaults);
 
+
+  var pymChild = new pym.Child({
+    renderCallback: function() {
+      update(model.get(), true);
+    }
+  });
+
   model.on('change', update);
 
-  d3.select(window).on('resize', function() {
-    update(model.get(), true);
+
+
+
+  d3.select('#embed').on('click', function() {
+    var show = !tooltip.classed('embed-show');
+    tooltip
+      .text(d3.select('#pre-text').html())
+      .position(show ? this : undefined)
+      .classed('embed-show', show);
   });
+
+
+
 
   function update(model_state, rerender) {
     var method = rerender ? 'render' : 'update';

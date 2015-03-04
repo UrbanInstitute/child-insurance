@@ -8,54 +8,69 @@
 </head>
 <body>
   <div id="content">
-    <div class="container">
-      <div class="row" id="title">
+
+    <div class="row">
+      <div class="six columns">
         <h2>Lorem ipsum dolor.</h2>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit iusto commodi reiciendis odit eos natus numquam quo corrupti alias necessitatibus?
       </div>
-      <div class="row">
-        <div class="nine columns">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit iusto commodi reiciendis odit eos natus numquam quo corrupti alias necessitatibus?
+      <div class="six columns">
+
+        <label for=".urban-toggle">
+          King vs Burwell enacted
+        </label>
+        <div class="urban-toggle" id="king-toggle">
+          <div id="False" class="option">n</div>
+          <div id="True" class="option">y</div>
         </div>
-        <div class="three columns" id="read-report-container">
-          <div class="urban-button selected">READ THE REPORT</div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="three columns">
-          <label for=".urban-toggle">
-            King vs Burwell enacted
-          </label>
-          <div class="urban-toggle" id="king-toggle">
-            <div id="False" class="option">n</div>
-            <div id="True" class="option">y</div>
+
+        <label for="scenario-buttons">
+          Scenarios
+        </label>
+        <div id="scenarios">
+          <div class="urban-button" id="current">
+            Current Funding
+          </div>
+          <div class="urban-button" id="noschip">
+            S-CHIP Defunded
+          </div>
+          <div class="urban-button" id="nomoe">
+            No Maintenance of Effort
           </div>
         </div>
-        <div class="nine columns">
-          <label for="scenario-buttons">
-            Scenarios
-          </label>
-          <div id="scenarios">
-            <div class="urban-button" id="current">
-              Current Funding
-            </div>
-            <div class="urban-button" id="noschip">
-              No Separate Child's Health Insurance Program
-            </div>
-            <div class="urban-button" id="nomoe">
-              No Maintenance of Effort
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row" id="charts">
-        <div class="six columns"><div id="states"></div></div>
-        <div class="six columns"><div id="incomes"></div></div>
-      </div>
-      <div class="row" id="embed">
-        <div class="urban-button selected">EMBED GRAPHIC</div>
+
       </div>
     </div>
+
+    <div class="row" id="charts">
+      <div class="six columns"><div id="states" class="chart"></div></div>
+      <div class="six columns"><div id="incomes" class="chart"></div></div>
+    </div>
+    <div class="row" id="bottom-buttons">
+      <span class="urban-button selected">READ THE REPORT</span>
+      <span class="urban-button selected">ABOUT TOOL</span>
+      <span id="embed" class="urban-button selected">EMBED GRAPHIC</span>
+    </div>
+
   </div>
+
+  <div id="tooltip" class="arrow_box">test</div>
+
+  <div id="pre-text">
+<h6>Use this code to embed graphic</h6>
+<pre>
+  &lt;div id=\"urban_iframe\">&lt;/div&gt;
+  &lt;script type=\"text/javascript\"
+    src=\"http://datatools.urban.org/features/pym.js\"
+  &gt;&lt;/script&gt;
+  &lt;script&gt;
+    var pymParent = new pym.Parent(
+      'urban_iframe',\"app/index.html\", {}
+    );
+  &lt;/script&gt;
+</pre>
+  </div>
+
   <script src='bundle.js'></script>
 </body>
 </html>
