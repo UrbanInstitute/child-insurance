@@ -32,17 +32,11 @@ text.line-title {
 
 text.axis-text {
   font-size: 11px;
-  font-style: italic;
 }
 
-text.bar-label {
-  font-size: 12px;
-  font-weight: bold;
-}
 
 text.bracket-title {
   font-size: 11px;
-  font-weight: bold;
 }
 
 text.legend-text {
@@ -53,7 +47,6 @@ text.y-axis-title {
   font-size: 11px;
   font-style: italic;
 }
-
 
 .axis text {
   font-size: 11px;
@@ -71,6 +64,6 @@ text.y-axis-title {
 
 .grid.linechart .tick:first-child line {
   stroke-dasharray : 0;
-  stroke : #000;
+  stroke-width:2px;
 }
 

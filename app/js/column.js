@@ -2,7 +2,6 @@
   column chart with wire overlay
 */
 
-
 var d3 = require('../lib/d3.js');
 var percent = d3.format('%');
 var percent1 = d3.format('.1%');
@@ -17,7 +16,6 @@ var pop = function(d) {
 };
 
 var dur = 300;
-
 
 function ColumnChart(opts) {
   this.opts = opts;
@@ -38,15 +36,16 @@ ColumnChart.prototype.update = function(bar_data, line_data, no_trans) {
   var h = this.height;
   var barWidths = this.barWidths;
 
-  var transition = function(selection) {
-    return no_trans ? selection : selection.transition().duration(dur);
-  };
-
-  transition(
-      this.bars.data(bar_data).select('.bar')
-    )
+  transition(this.bars.data(bar_data).select('.bar'))
     .attr('y', function(d) { return y(Number(d.rate)); })
     .attr('height', function(d) { return h - y(Number(d.rate)); });
+
+  function transition(selection) {
+    return no_trans ?
+      selection :
+      selection.transition()
+               .duration(dur);
+  }
 
   return this;
 };
@@ -119,7 +118,6 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
     .attr("transform", "translate(" + w + ",0)")
     .call(yGrid);
 
-
   // calculate widths for bar chart
   var barWidths = this.barWidths = bar_data.map(function(r) {
     return Number(r.weight)*w;
@@ -158,8 +156,6 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
     .attr('height', 7)
     .attr('y', h - 2);
 
-
-
   // reset starting point for x axis text
   this.maxTextHeight = 0;
 
@@ -180,7 +176,11 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
     .attr('class', 'y-axis-title')
     .text('Uninsurance rate')
     .attr('x', -m.left)
-    .attr('transform', y_axis_g.select('.tick:nth-last-child(2)').attr('transform'))
+    .attr(
+      'transform',
+        y_axis_g.select('.tick:nth-last-child(2)')
+          .attr('transform')
+    )
     .attr('y', function() {
       return -this.getBBox().height;
     });

@@ -11,10 +11,18 @@ label:not(:first-child) {
   margin-top: 10px;
 }
 
+div label {
+  font-weight: 400;
+}
+
 ul li {
   list-style-type: disc;
   margin: 0px;
   margin-top: 8px;
+}
+
+#read-report {
+  background-color: #000;
 }
 
 #text ul {
@@ -29,11 +37,11 @@ ul li {
 
 #content h5 {
   font-size: 32px;
-  margin-bottom: 0px;
+  margin-bottom: 10px;
 }
 
 #text {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 #title {
@@ -64,8 +72,13 @@ ul li {
   width: 100%;
 }
 
-#bottom-buttons .urban-button {
-  background-color: #000;
+#bottom-buttons a {
+  font-size: 12px;
+  text-decoration: none;
+  margin-left: 20px;
+  color: #1696d2;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 

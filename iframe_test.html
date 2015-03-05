@@ -1,28 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
   <meta charset="UTF-8">
   <title>Document</title>
   <style>
-
-    html, body {
-      width: 100%;
-    }
-
-    #test-frame {
+    .test-frame {
       margin: 0 auto;
       display: block;
       width: 600px;
     }
-
   </style>
 </head>
 <body>
-  <div id="test-frame">
-    <div id="urban_iframe"></div>
-    <script type="text/javascript" src="http://datatools.urban.org/features/fha-refinance/js/vendor/pym.js"></script>
-    <script> var pymParent = new pym.Parent('urban_iframe', "http://datatools.urban.org/features/bsouthga/child-insurance/index.html", {});</script>
+  <div class="test-frame">
+    <script src="http://datatools.urban.org/features/embed.js"
+            data-viz="bsouthga/child-insurance"></script>
   </div>
 </body>
 </html>
