@@ -1,9 +1,5 @@
 html, body {
   font-family: Lato;
-  width: 100%;
-}
-
-html {
   box-sizing: border-box;
 }
 
@@ -16,8 +12,14 @@ ul li {
   margin: 0px;
 }
 
+label {
+  margin-top: 15px;
+}
+
 #content {
   padding: 10px;
+  display: block;
+  width: 100%;
 }
 
 #content h5 {
@@ -52,64 +54,15 @@ ul li {
   padding: 0px;
 }
 
-.chart {
-  white-space: normal;
-  display: inline-block;
-  margin: 0px;
-  margin-bottom: 20px;
-  width: 50%;
-  padding: 0px;
+#scenarios .urban-button {
+  margin-bottom: 5px;
+  width: 100%;
 }
-
 
 #bottom-buttons .urban-button {
   background-color: #000;
 }
 
-path.line {
-  stroke : #ec008c;
-  stroke-width: 1px;
-  fill : none;
-}
-
-path.bracket {
-  fill : none;
-  stroke : #000;
-}
-
-text.chart-title {
-  font-weight: bold;
-}
-
-text.line-title {
-  fill : #ec008c;
-  font-size: 10px;
-  font-style: italic;
-  font-weight: bold;
-}
-
-text.axis-text {
-  font-size: 10px;
-  font-style: italic;
-}
-
-text.bar-label {
-  font-size: 12px;
-  font-weight: bold;
-}
-
-text.bracket-title {
-  font-size: 10px;
-  font-weight: bold;
-}
-
-text.legend-text {
-  font-size: 11px;
-}
-
-label {
-  margin-top: 15px;
-}
 
 .urban-toggle {
   display: block;
@@ -125,7 +78,7 @@ label {
   text-align: center;
   cursor: pointer;
   margin: 0px;
-  padding: 0px;
+  padding: 3px 5px;
 }
 
 .urban-toggle .option,
@@ -139,7 +92,6 @@ label {
   background-color: rgb(29,175,236);
 }
 
-
 .urban-button, label {
   font-size: 12px;
 }
@@ -150,74 +102,17 @@ label {
   cursor: pointer;
 }
 
-#scenarios .urban-button {
-  margin-bottom: 5px;
-  width: 100%;
-}
-
 @media(max-width: 978px) {
-  .urban-button, .urban-toggle, label {
+  .urban-button, .urban-toggle .option, label {
     font-size: 10px;
   }
 }
 
-.axis text {
-  font-size: 10px;
+@media(max-width: 550px) {
+  .chart {
+    display: block;
+    width: 100%;
+  }
 }
 
-.y.axis.linechart .domain {
-  fill : none;
-  stroke : none;
-}
 
-.grid.linechart .tick {
-  stroke-dasharray : 2, 2;
-  stroke : #aaa;
-}
-
-#tooltip {
-  font-size: 12px;
-  display: block;
-  position: absolute;
-  background: rgba(0, 0, 0, 0.75);
-  color:#fff;
-  padding: 5px 10px;
-  opacity: 0;
-}
-
-#tooltip:after, #tooltip:before {
-  top: 100%;
-  left: 50%;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-}
-
-#tooltip:after {
-  border-color: rgba(0, 0, 0, 0);
-  border-top-color: rgba(0, 0, 0, 0);
-  border-width: 10px;
-  margin-left: -10px;
-}
-
-#tooltip:before {
-  border-color: rgba(0, 0, 0, 0);
-  border-top-color: rgba(0, 0, 0, 0.75);
-  border-width: 11px;
-  margin-left: -11px;
-}
-
-#tooltip span.title {
-  font-weight: bold;
-}
-
-#pre-text {
-  display: none;
-}
-
-#tooltip h6 {
-  border-bottom: 1px solid #fff;
-}

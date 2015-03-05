@@ -42,7 +42,7 @@ function ready(e, data) {
     "domain" : [
       0, max_max*1.1
     ],
-    "margin" : {"top" : 65},
+    "margin" : {"top" : 85},
     "brackets" : [
       {
         "extent" : [0,2],
@@ -106,12 +106,24 @@ function ready(e, data) {
 
   model.on('change', update);
 
+  var plexiglass = d3.select('.plexiglass');
+  var close_modal = d3.select('.close-modal');
+
   d3.select('#embed').on('click', function() {
-    var show = !tooltip.classed('embed-show');
-    tooltip
-      .text(d3.select('#pre-text').html())
-      .position(show ? this : undefined)
-      .classed('embed-show', show);
+    plexiglass
+      .style('display', 'block')
+      .transition()
+      .duration(300)
+      .style('opacity', 1);
+    close_modal.on('click', function() {
+      plexiglass
+        .transition()
+        .duration(300)
+        .style('opacity', 0)
+        .each('end', function(d, i) {
+          if (!i) plexiglass.style('display', 'none');
+        });
+    });
   });
 
 

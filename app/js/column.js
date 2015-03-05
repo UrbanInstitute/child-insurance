@@ -67,7 +67,7 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
   var tooltip = this.opts.tooltip;
   var con = this.container;
   var bb = con.node().getBoundingClientRect();
-  var m = { top: 30, right: 10, bottom: 40, left: 32 };
+  var m = { top: 55, right: 10, bottom: 40, left: 32 };
 
   var margin_top_start = m.top;
 
@@ -92,6 +92,7 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
   var y = this.y = d3.scale.linear()
     .range([h, 0])
     .domain(this.opts.domain || [0, 0.2]);
+
 
   // compute margin change for domain adjustment
   y.domain([0, y.invert(m.top - margin_top_start)]);
@@ -167,6 +168,16 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
       return -m.left;
     });
 
+  var yTitle = svg.append('text')
+    .attr('class', 'y-axis-title')
+    .text('Uninsurance rate')
+    .attr('x', -m.left)
+    .attr('transform', y_axis_g.select('.tick:nth-last-child(2)').attr('transform'))
+    .attr('y', function() {
+      return -this.getBBox().height;
+    });
+
+
   for (var title in line_data) {
     this.addLine(line_data[title], title);
   }
@@ -199,7 +210,8 @@ ColumnChart.prototype.addXAxisText = function(config) {
     .attr('class', 'axis-text')
     .text(function(d, i) {
       var t = !i ? (" " + config.text) : "";
-      return format(d[config.variable]) + t;
+      var out = format(d[config.variable]) + t;
+      return i ? out.replace('%', '') : out;
     })
     .attr('y', function() {
       var t_height = this.getBBox().height;

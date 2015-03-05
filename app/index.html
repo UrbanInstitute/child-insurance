@@ -10,7 +10,7 @@
   <div id="content">
 
     <div class="row">
-      <div class="eight columns">
+      <div class="seven columns">
         <h5>Children’s Coverage at Risk</h5>
         <div id="text">
           The coming months could see major changes in children’s health coverage:
@@ -32,28 +32,28 @@
           </ul>
         </div>
       </div>
-      <div class="four columns">
+      <div class="five columns">
 
         <label for=".urban-toggle">
           Tax credits in federal marketplaces:
         </label>
         <div class="urban-toggle" id="king-toggle">
-          <div id="False" class="option">available</div>
-          <div id="True" class="option">unavailable</div>
+          <div id="False" class="option">Available</div>
+          <div id="True" class="option">Unavailable</div>
         </div>
 
         <label for="scenario-buttons">
-          Scenarios
+          Children’s eligibility for CHIP and Medicaid:
         </label>
         <div id="scenarios">
           <div class="urban-button" id="current">
-            Current Funding
+            CHIP extended and eligibility unchanged
           </div>
           <div class="urban-button" id="noschip">
-            S-CHIP Defunded
+            CHIP not extended
           </div>
           <div class="urban-button" id="nomoe">
-            No Maintenance of Effort
+            States reduce eligibility to 138% FPL
           </div>
         </div>
 
@@ -70,26 +70,31 @@
       <span id="embed" class="urban-button selected">EMBED GRAPHIC</span>
     </div>
 
+    <div class="plexiglass">
+      <div class="modal">
+        <div class="modal-title">
+          Copy this code to embed graphic
+          <span class="close-modal"><img src="images/close.png" alt=""></span>
+        </div>
+        <pre>
+&lt;div id='urban_iframe'>&lt;/div&gt;
+&lt;script type='text/javascript'
+  src='http://datatools.urban.org/features/pym.js'
+&gt;&lt;/script&gt;
+&lt;script&gt;
+  var pymParent = new pym.Parent(
+    'urban_iframe',
+    'http://datatools.urban.org/features/bsouthga/child-insurance/',
+    {}
+  );
+&lt;/script&gt;
+        </pre>
+      </div>
+    </div>
+
   </div>
 
   <div id="tooltip" class="arrow_box">test</div>
-
-  <div id="pre-text">
-<h6>Use this code to embed graphic</h6>
-<pre>
-  &lt;div id='urban_iframe'>&lt;/div&gt;
-  &lt;script type='text/javascript'
-    src='http://datatools.urban.org/features/pym.js'
-  &gt;&lt;/script&gt;
-  &lt;script&gt;
-    var pymParent = new pym.Parent(
-      'urban_iframe',
-      'http://datatools.urban.org/features/bsouthga/child-insurance/',
-      {}
-    );
-  &lt;/script&gt;
-</pre>
-  </div>
 
   <script src='bundle.js'></script>
 </body>

@@ -26,9 +26,11 @@ function tooltip() {
         scrollTop, p, width,
         nw, nx, svgw, svgh,
         tt_bb, svg_bb, node_bb,
-        node_width, node_heigth;
+        node_width, node_heigth, pos;
 
     if (node) {
+
+      tt.style(hide());
 
       scrollTop = windowScrollTop();
       node_bb = node.getBBox ? node.getBBox() : node.getBoundingClientRect();
@@ -89,16 +91,15 @@ function tooltip() {
         - 10 // extra 10 pixels to padd for tooltip arrow
       );
 
-    } else {
-      // move off screen otherwise
-      x = y = -9999;
-    }
+      pos = {
+        'top' : Math.round(y) + 'px',
+        'left' : Math.round(x) + 'px'
+      };
 
-    // absolutely position tooltip
-    var pos = {
-      'top' : y + 'px',
-      'left' : x + 'px'
-    };
+
+    } else {
+      pos = hide();
+    }
 
     // if hiding / showing transition must
     // come before / after style
@@ -119,6 +120,17 @@ function tooltip() {
             if (!i) tt.style(pos);
           });
       }
+    }
+
+    function hide() {
+      // move off screen otherwise
+      tt_bb = tt.node().getBoundingClientRect();
+      x = -tt_bb.width - 200;
+      y = -tt_bb.height - 200;
+      return {
+        'top' : Math.round(y) + 'px',
+        'left' : Math.round(x) + 'px'
+      };
     }
 
 

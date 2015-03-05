@@ -12,6 +12,7 @@ echo copying data...
 cp -r app/data dist/data
 cp app/index.html dist/index.html
 cp iframe_test.html dist/
+cp -r app/images dist/images
 
 echo creating tarball...
 cd dist/

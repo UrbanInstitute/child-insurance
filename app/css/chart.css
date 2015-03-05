@@ -1,0 +1,70 @@
+
+.chart {
+  white-space: normal;
+  display: inline-block;
+  margin: 0px;
+  margin-bottom: 20px;
+  width: 50%;
+  padding: 0px;
+}
+
+path.line {
+  stroke : #ec008c;
+  stroke-width: 1px;
+  fill : none;
+}
+
+path.bracket {
+  fill : none;
+  stroke : #000;
+  stroke-width: 1px;
+}
+
+text.chart-title {
+  font-weight: bold;
+}
+
+text.line-title {
+  fill : #ec008c;
+  font-size: 10px;
+  font-style: italic;
+  font-weight: bold;
+}
+
+text.axis-text {
+  font-size: 10px;
+  font-style: italic;
+}
+
+text.bar-label {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+text.bracket-title {
+  font-size: 10px;
+  font-weight: bold;
+}
+
+text.legend-text {
+  font-size: 11px;
+}
+
+text.y-axis-title {
+  font-size: 11px;
+}
+
+
+.axis text {
+  font-size: 10px;
+}
+
+.y.axis.linechart .domain {
+  fill : none;
+  stroke : none;
+}
+
+.grid.linechart .tick {
+  stroke-dasharray : 2, 2;
+  stroke : #aaa;
+}
