@@ -41,6 +41,15 @@ module.exports = function(grunt) {
       }
     },
 
+    shell: {
+        options: {
+            stderr: false
+        },
+        deploy: {
+            command: 'sh ./deploy'
+        }
+    },
+
     browserSync: {
       bsFiles: {
         src: [
@@ -71,7 +80,8 @@ module.exports = function(grunt) {
     'watch'
   ];
 
-
   grunt.registerTask('default', prep.concat(watch));
+
+  grunt.registerTask('deploy', prep.concat(['shell']));
 
 };

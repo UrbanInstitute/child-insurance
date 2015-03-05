@@ -12,6 +12,10 @@ ul li {
   margin: 0px;
 }
 
+#text ul {
+  margin-bottom: 0px;
+}
+
 label {
   margin-top: 15px;
 }
@@ -23,6 +27,7 @@ label {
 }
 
 #content h5 {
+  font-size: 27px;
   margin-bottom: 0px;
 }
 
