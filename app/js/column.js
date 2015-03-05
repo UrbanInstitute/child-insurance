@@ -76,8 +76,8 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
       m[e.key] = e.value;
     });
   }
-  this.margin = m;
 
+  this.margin = m;
 
   var w = this.width = bb.width - m.left - m.right;
   var h = this.height = bb.height - m.top - m.bottom;
@@ -92,7 +92,6 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
   var y = this.y = d3.scale.linear()
     .range([h, 0])
     .domain(this.opts.domain || [0, 0.2]);
-
 
   // compute margin change for domain adjustment
   y.domain([0, y.invert(m.top - margin_top_start)]);
@@ -137,7 +136,7 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
 
   this.bars.append('rect')
     .attr('class', 'bar')
-    .attr('width', function(d, i) {return (barWidths[i] - 2) + 'px';})
+    .attr('width', function(d, i) {return barWidths[i] + 'px';})
     .on('mouseover', function(d) {
       tooltip
         .text(
@@ -150,13 +149,22 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
       tooltip.position();
     });
 
+  // axis ticks for bar
+  this.bars
+    .filter(function(d, i) { return i !== 0; })
+    .append('rect')
+    .attr('class', 'x axis tick')
+    .attr('width', 1)
+    .attr('height', 7)
+    .attr('y', h - 2);
+
+
+
   // reset starting point for x axis text
   this.maxTextHeight = 0;
 
   // add all the rows of x axis text
-  this.opts.xAxisRows.forEach(
-    this.addXAxisText.bind(this)
-  );
+  this.opts.xAxisRows.forEach(this.addXAxisText.bind(this));
 
   var chart_title = this.chart_title = svg.append('text')
     .attr('class', 'chart-title')
@@ -176,7 +184,6 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
     .attr('y', function() {
       return -this.getBBox().height;
     });
-
 
   for (var title in line_data) {
     this.addLine(line_data[title], title);
@@ -246,10 +253,10 @@ ColumnChart.prototype.addLine = function(line_data, text) {
   // generate line data using bar widths
   var line_points = [];
   line_data.forEach(function(p, i) {
-    var width = barWidths[i] - 2;
+    var width = barWidths[i];
     var pad = self.barPad(i);
-    line_points.push({x : pad - 1, y : y(Number(p.rate))});
-    line_points.push({x : pad + 1 + width, y : y(Number(p.rate))});
+    line_points.push({x : pad, y : y(Number(p.rate))});
+    line_points.push({x : pad + width, y : y(Number(p.rate))});
   });
 
   this.svg.append('g').append('path')
@@ -298,7 +305,7 @@ ColumnChart.prototype.addLegend = function(legend_opts) {
 
     var legend = svg.append('g');
 
-    var legend_rect_size = 15;
+    var legend_rect_size = 10;
 
     // convert vals to array
     d3.values(vals).forEach(function(val, i) {
@@ -315,10 +322,7 @@ ColumnChart.prototype.addLegend = function(legend_opts) {
           .attr('class', 'legend-text')
           .attr('x', legend_rect_size * 1.5)
           .text(val.text)
-          .attr('y', function() {
-            var bb = this.getBBox();
-            return legend_rect_size/2 + bb.height/2;
-          });
+          .attr('y', legend_rect_size);
       });
 
 

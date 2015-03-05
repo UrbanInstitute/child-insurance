@@ -42,7 +42,7 @@ function ready(e, data) {
     "domain" : [
       0, max_max*1.1
     ],
-    "margin" : {"top" : 85},
+    "margin" : {"top" : 65},
     "brackets" : [
       {
         "extent" : [0,2],
@@ -148,7 +148,7 @@ function ready(e, data) {
 
 function lineData(chart, data) {
   return {
-    "Pre-ACA" : prepData(data, {
+    "Without ACA" : prepData(data, {
       "chart" : chart,
       "aca" : "False",
       "king" : "False",

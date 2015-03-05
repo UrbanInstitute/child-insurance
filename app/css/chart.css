@@ -27,12 +27,11 @@ text.chart-title {
 text.line-title {
   fill : #ec008c;
   font-size: 10px;
-  font-style: italic;
   font-weight: bold;
 }
 
 text.axis-text {
-  font-size: 10px;
+  font-size: 11px;
   font-style: italic;
 }
 
@@ -42,7 +41,7 @@ text.bar-label {
 }
 
 text.bracket-title {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: bold;
 }
 
@@ -52,11 +51,12 @@ text.legend-text {
 
 text.y-axis-title {
   font-size: 11px;
+  font-style: italic;
 }
 
 
 .axis text {
-  font-size: 10px;
+  font-size: 11px;
 }
 
 .y.axis.linechart .domain {
@@ -68,3 +68,9 @@ text.y-axis-title {
   stroke-dasharray : 2, 2;
   stroke : #aaa;
 }
+
+.grid.linechart .tick:first-child line {
+  stroke-dasharray : 0;
+  stroke : #000;
+}
+
