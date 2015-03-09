@@ -109,23 +109,26 @@ function ready(e, data) {
   var plexiglass = d3.select('.plexiglass');
   var close_modal = d3.select('.close-modal');
 
+  var hideModal = function() {
+    plexiglass
+      .transition()
+      .duration(300)
+      .style('opacity', 0)
+      .each('end', function(d, i) {
+        if (!i) plexiglass.style('display', 'none');
+      });
+  };
+
   d3.select('#embed').on('click', function() {
     plexiglass
       .style('display', 'block')
       .transition()
       .duration(300)
       .style('opacity', 1);
-    close_modal.on('click', function() {
-      plexiglass
-        .transition()
-        .duration(300)
-        .style('opacity', 0)
-        .each('end', function(d, i) {
-          if (!i) plexiglass.style('display', 'none');
-        });
-    });
+    close_modal.on('click', hideModal);
   });
 
+  plexiglass.on('click', hideModal);
 
   function render() {
     update(model.get(), true);

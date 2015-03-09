@@ -10,7 +10,8 @@
 }
 
 .modal {
-  width: 50%;
+  width: 65%;
+  height: 13%;
   display: block;
   margin: 0 auto;
   background-color: #fff;

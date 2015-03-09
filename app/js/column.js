@@ -154,7 +154,8 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
     .attr('class', 'x axis tick')
     .attr('width', 1)
     .attr('height', 7)
-    .attr('y', h - 2);
+    .attr('y', h - 2)
+    .attr('x', -0.5);
 
   // reset starting point for x axis text
   this.maxTextHeight = 0;

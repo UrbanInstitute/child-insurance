@@ -75,12 +75,16 @@ ul li {
 #bottom-buttons a {
   font-size: 12px;
   text-decoration: none;
-  margin-left: 20px;
+  margin-right: 20px;
   color: #1696d2;
   font-weight: 700;
   cursor: pointer;
 }
 
+#change-scenarios {
+  font-weight: bold;
+  margin-top:20px;
+}
 
 .urban-toggle {
   display: block;
@@ -89,6 +93,7 @@ ul li {
 }
 
 .urban-toggle .option {
+  text-transform: uppercase;
   display: inline-block;
   font-size: 12px;
   width: 50%;
@@ -115,6 +120,8 @@ ul li {
 }
 
 .urban-button {
+  text-transform: uppercase;
+  text-align: center;
   background-color: #ccc;
   padding: 8px 6px;
   cursor: pointer;
