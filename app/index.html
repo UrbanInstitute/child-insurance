@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,6 +8,7 @@
   <link href='http://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="bundle.css">
 </head>
+
 <body>
   <div id="content">
 
@@ -21,19 +23,12 @@
         <div id="text">
           The coming months could see major changes in children’s health coverage:
           <ul>
-            <li>The Supreme Court will decide in King v. Burwell whether premium
-            tax credits will be available in the 34 states that have not established
-            their own health insurance marketplaces. The federal government has
-            established marketplaces in those states.
+            <li>The Supreme Court will decide in King v. Burwell whether premium tax credits will be available in the 34 states that have not established their own health insurance marketplaces. The federal government has established marketplaces in those states.
             </li>
             <li>
-            Federal funding for the Children’s Health Insurance Program
-            (CHIP) will end this October unless Congress extends it, eliminating
-            separate CHIP programs in 36 states.
+              Federal funding for the Children’s Health Insurance Program (CHIP) will end this October unless Congress extends it, eliminating separate CHIP programs in 36 states.
             </li>
-            <li>Currently, states must preserve eligibility standards for children
-            until 2019. Proposed Congressional legislation would immediately let
-            states reduce eligibility for Medicaid and CHIP to 138 percent FPL.
+            <li>Currently, states must preserve eligibility standards for children until 2019. Proposed Congressional legislation would immediately let states reduce eligibility for Medicaid and CHIP to 138 percent FPL.
             </li>
           </ul>
         </div>
@@ -72,8 +67,12 @@
     <div class="row" id="charts">
       <div id="states" class="chart"></div>
       <div id="incomes" class="chart"></div>
+
     </div>
     <div class="row" id="bottom-buttons">
+      <p id="source">
+        <b>Source:</b> Urban Institute analysis (Dubay, Buettgens, and Kenney 2015) for MACPAC of the HIPSM-ACS enhanced with MEPS-IC data from the AHRQ
+      </p>
       <a id="about">ABOUT TOOL</a>
       <a id="embed">EMBED GRAPHIC</a>
     </div>
@@ -84,7 +83,9 @@
           Copy this code to embed graphic
           <span class="close-modal"><img src="images/close.png" alt=""></span>
         </div>
-        <pre id="code-example"></pre>
+        <div class="modal-body">
+          <pre id="code-example"></pre>
+        </div>
       </div>
     </div>
 
@@ -94,45 +95,184 @@
           About this graphic
           <span class="close-modal"><img src="images/close.png" alt=""></span>
         </div>
-        <p class="about-text">These estimates are derived using the Urban Institute’s Health Insurance Policy Simulation Model–American Community Survey (HIPSM-ACS).  They extend an earlier series of <a href="http://www.urban.org/url.cfm?ID=2000106" target="_blank">Urban Institute reports on the impact of King v. Burwell.</a>
-</p>
-<p class="about-text">For purposes of this analysis, we include 34 states as federally facilitated marketplace states, encompassing those where the federal government has taken on complete responsibility (19), those with explicit agreements with the federal government where the state takes on some responsibilities but not others (7), and states without explicit agreements but which have taken responsibility for plan management nonetheless (8). We do not include states that had created the legal framework for an SBM but for which technical problems led to use of the federal information technology system (HealthCare.gov).</p>
-          
+        <div class="modal-body">
+          <p class="about-text">These estimates are derived using the Urban Institute’s Health Insurance Policy Simulation Model–American Community Survey (HIPSM-ACS). They extend an earlier series of <a href="http://www.urban.org/url.cfm?ID=2000106" target="_blank">Urban Institute reports on the impact of King v. Burwell.</a>
+          </p>
+          <p class="about-text">For purposes of this analysis, we include 34 states as federally facilitated marketplace states, encompassing those where the federal government has taken on complete responsibility (19), those with explicit agreements with the federal government where the state takes on some responsibilities but not others (7), and states without explicit agreements but which have taken responsibility for plan management nonetheless (8). We do not include states that had created the legal framework for an SBM but for which technical problems led to use of the federal information technology system (HealthCare.gov).</p>
+
           <p class="about-text">
-<table class="about-table">
-<tbody><tr class="tableizer-firstrow"><th>Federally Facilitated Marketplaces</th><th>&nbsp;</th><th>State-Based Marketplaces</th><th>&nbsp;</th></tr>
- <tr style="
-    font-style: italic;
-"><td>Separate CHIP&nbsp;(55% of children)</td><td>No separate CHIP (11% of children)</td><td>Separate CHIP&nbsp;(17% of children)</td><td>No separate CHIP (18% of children)</td></tr>
- <tr><td>Alabama</td><td>Alaska</td><td>Colorado</td><td>California</td></tr>
- <tr><td>Delaware</td><td>Arizona</td><td>Connecticut</td><td>District of Columbia</td></tr>
- <tr><td>Florida</td><td>Arkansas</td><td>Idaho</td><td>Hawaii</td></tr>
- <tr><td>Georgia</td><td>Nebraska</td><td>Kentucky</td><td>Maryland</td></tr>
- <tr><td>Illinois</td><td>New Hampshire</td><td>Massachusetts</td><td>Minnesota</td></tr>
- <tr><td>Indiana</td><td>Ohio</td><td>Nevada</td><td>New Mexico</td></tr>
- <tr><td>Iowa</td><td>Oklahoma</td><td>New York</td><td>Rhode Island</td></tr>
- <tr><td>Kansas</td><td>South Carolina</td><td>Oregon</td><td>&nbsp;</td></tr>
- <tr><td>Louisiana</td><td>&nbsp;</td><td>Vermont</td><td>&nbsp;</td></tr>
- <tr><td>Maine</td><td>&nbsp;</td><td>Washington</td><td>&nbsp;</td></tr>
- <tr><td>Michigan</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
- <tr><td>Mississippi</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
- <tr><td>Missouri</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
- <tr><td>Montana</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
- <tr><td>New Jersey</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
- <tr><td>North Carolina</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
- <tr><td>North Dakota</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
- <tr><td>Pennsylvania</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
- <tr><td>South Dakota</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
- <tr><td>Tennessee</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
- <tr><td>Texas</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
- <tr><td>Utah</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
- <tr><td>Virginia</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
- <tr><td>West Virginia</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
- <tr><td>Wisconsin</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
- <tr><td>Wyoming</td><td>&nbsp;</td><td>&nbsp;</td><td></td></tr>
-</tbody></table>
-</p>
-      
+            <table class="about-table">
+              <tbody>
+                <tr class="tableizer-firstrow">
+                  <th colspan="2">Federally Facilitated Marketplaces</th>
+                  <th colspan="2">State-Based Marketplaces</th>
+                </tr>
+                <tr style="font-style: italic;">
+                  <td>Separate CHIP&nbsp;(55% of children)</td>
+                  <td>No separate CHIP (11% of children)</td>
+                  <td>Separate CHIP&nbsp;(17% of children)</td>
+                  <td>No separate CHIP (18% of children)</td>
+                </tr>
+                <tr>
+                  <td>Alabama</td>
+                  <td>Alaska</td>
+                  <td>Colorado</td>
+                  <td>California</td>
+                </tr>
+                <tr>
+                  <td>Delaware</td>
+                  <td>Arizona</td>
+                  <td>Connecticut</td>
+                  <td>District of Columbia</td>
+                </tr>
+                <tr>
+                  <td>Florida</td>
+                  <td>Arkansas</td>
+                  <td>Idaho</td>
+                  <td>Hawaii</td>
+                </tr>
+                <tr>
+                  <td>Georgia</td>
+                  <td>Nebraska</td>
+                  <td>Kentucky</td>
+                  <td>Maryland</td>
+                </tr>
+                <tr>
+                  <td>Illinois</td>
+                  <td>New Hampshire</td>
+                  <td>Massachusetts</td>
+                  <td>Minnesota</td>
+                </tr>
+                <tr>
+                  <td>Indiana</td>
+                  <td>Ohio</td>
+                  <td>Nevada</td>
+                  <td>New Mexico</td>
+                </tr>
+                <tr>
+                  <td>Iowa</td>
+                  <td>Oklahoma</td>
+                  <td>New York</td>
+                  <td>Rhode Island</td>
+                </tr>
+                <tr>
+                  <td>Kansas</td>
+                  <td>South Carolina</td>
+                  <td>Oregon</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Louisiana</td>
+                  <td>&nbsp;</td>
+                  <td>Vermont</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Maine</td>
+                  <td>&nbsp;</td>
+                  <td>Washington</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Michigan</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Mississippi</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Missouri</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Montana</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>New Jersey</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>North Carolina</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>North Dakota</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Pennsylvania</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>South Dakota</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Tennessee</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Texas</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Utah</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Virginia</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>West Virginia</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Wisconsin</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr>
+                  <td>Wyoming</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </p>
+        </div>
       </div>
     </div>
 
@@ -142,4 +282,5 @@
 
   <script src='bundle.js'></script>
 </body>
+
 </html>

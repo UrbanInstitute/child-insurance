@@ -11,12 +11,18 @@
 
 .modal {
   width: 65%;
-  height: 13%;
   display: block;
   margin: 0 auto;
   background-color: #fff;
   color: #000;
   margin-top: 40px;
+}
+
+.modal-body {
+  display: block;
+  max-height: 600px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .deep{
@@ -44,15 +50,18 @@
 }
 
 .about-text{
- padding: 10px;   
-    font-size: 11pt;
-    margin-bottom: 0;
+  padding: 10px;
+  font-size: 11pt;
+  margin-bottom: 0;
 }
 
-.about-table{
-    font-size: 11pt;
+table.about-table {
+  font-size: 11pt;
+  margin: 10px;
 }
+
 
 .about-table tbody th td{
- padding: 50px;   
+ padding: 50px;
 }
+

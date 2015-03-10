@@ -60,6 +60,10 @@ ul li {
   fill : rgb(254, 202, 48);
 }
 
+#source {
+  font-size: 11px;
+}
+
 #charts {
   margin : 0px;
   margin-top: 20px;
