@@ -60,7 +60,9 @@ function ready(e, data) {
   );
 
   // model starting with defaults
-  var model = events(defaults);
+  var model = events(defaults).on('change', update);
+  var embed_modal = d3.select('#embed-modal');
+  var about_modal = d3.select('#about-modal');
 
   var stateChart = new ColumnChart({
     "container" : d3.select("#states"),
@@ -122,47 +124,65 @@ function ready(e, data) {
     ]
   });
 
-
+  /*
+    Render charts with default settings
+  */
   update(defaults);
+
 
   var pymChild = new pym.Child({
     renderCallback: render
   });
 
+  /*
+    bind resize behavior
+  */
   d3.select(window).on('resize', render);
 
-  model.on('change', update);
+  /*
+    bind modal behavior
+  */
+  d3.select('#about').on('click', function() {
+    modalToggle(about_modal);
+  });
 
-  var plexiglass = d3.select('.plexiglass');
-  var close_modal = d3.select('.close-modal');
-
-  var hideModal = function() {
-    plexiglass
-      .transition()
-      .duration(300)
-      .style('opacity', 0)
-      .each('end', function(d, i) {
-        if (!i) plexiglass.style('display', 'none');
-      });
-  };
 
   d3.select('#embed').on('click', function() {
-
     d3.select('#code-example').html(
       '&lt;script src="http://datatools.urban.org/features/embed.js"' +
       'data-viz="bsouthga/child-insurance?' +
       buildParameters(model.get()) +
       '"&gt;&lt;/script&gt;'
     );
+    modalToggle(embed_modal);
+  });
 
-    plexiglass
+
+  function modalToggle(modal) {
+    var close_modal = modal.select('.close-modal');
+    showModal(modal);
+    close_modal.on('click', hideModal(modal));
+  }
+
+  function hideModal(modal) {
+    return function() {
+      modal
+        .transition()
+        .duration(300)
+        .style('opacity', 0)
+        .each('end', function(d, i) {
+          if (!i) modal.style('display', 'none');
+        });
+    };
+  }
+
+  function showModal(modal) {
+    modal
       .style('display', 'block')
       .transition()
       .duration(300)
       .style('opacity', 1);
-    close_modal.on('click', hideModal);
-
-  });
+  }
 
   function render() {
     update(model.get(), true);

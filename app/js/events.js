@@ -39,7 +39,10 @@ function controller(defaults) {
   }
 
   return {
-    on : dispatch.on.bind(dispatch),
+    on : function() {
+      dispatch.on.apply(dispatch, [].slice.call(arguments));
+      return this;
+    },
     get : function() { return model; }
   };
 }
