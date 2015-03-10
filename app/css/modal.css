@@ -19,6 +19,10 @@
   margin-top: 40px;
 }
 
+.deep{
+ height: auto;
+}
+
 .modal-title {
   width: 100%;
   padding: 10px;
@@ -37,4 +41,18 @@
 .modal pre {
   margin-left: 10px;
   font-size: 10px;
+}
+
+.about-text{
+ padding: 10px;   
+    font-size: 11pt;
+    margin-bottom: 0;
+}
+
+.about-table{
+    font-size: 11pt;
+}
+
+.about-table tbody th td{
+ padding: 50px;   
 }
