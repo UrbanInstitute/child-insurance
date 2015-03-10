@@ -5,27 +5,54 @@
 */
 
 // Vendor dependencies
-var d3 = require('../lib/d3.js'),
-    pym = require('../lib/pym.js');
+var d3 = require("../lib/d3.js"),
+    pym = require("../lib/pym.js");
 
 // Urban Scripts
-var ColumnChart = require('./column.js'),
-    loadCSVs = require('./load.js'),
-    events = require('./events.js');
-    tooltip = require('./tooltip.js')();
+var ColumnChart = require("./column.js"),
+    loadCSVs = require("./load.js"),
+    events = require("./events.js");
+    tooltip = require("./tooltip.js")();
 
-var defaults = {
-  'king' : "False",
-  "scenario" : "noschip",
+var defaults = urlParameters({
+  "king" : "False",
+  "scenario" : "current",
   "aca" : "True"
-};
+});
 
-loadCSVs(['data/states.csv', 'data/incomes.csv'], ready);
+loadCSVs(["data/states.csv", "data/incomes.csv"], ready);
+
+/*
+  Override defaults with url parameters
+*/
+function urlParameters(defaults) {
+  var query = location.search.substr(1);
+  var result = {};
+  query.split("&").forEach(function(part) {
+    var item = part.split("=");
+    result[item[0]] = decodeURIComponent(item[1]);
+  });
+  for (var k in defaults) {
+    if (k in result) {
+      defaults[k] = result[k];
+    }
+  }
+  return defaults;
+}
+
+function buildParameters(settings) {
+  var p = [];
+  for (var v in settings) {
+    p.push(v + '=' + settings[v]);
+  }
+  return p.join('&');
+}
+
 
 function ready(e, data) {
 
-  var states = data['data/states.csv'];
-  var incomes = data['data/incomes.csv'];
+  var states = data["data/states.csv"];
+  var incomes = data["data/incomes.csv"];
 
   var max_max = Math.max(
     d3.max(incomes, function(d) {return Number(d.rate);}),
@@ -120,15 +147,22 @@ function ready(e, data) {
   };
 
   d3.select('#embed').on('click', function() {
+
+    d3.select('#code-example').html(
+      '&lt;script src="http://datatools.urban.org/features/embed.js"' +
+      'data-viz="bsouthga/child-insurance?' +
+      buildParameters(model.get()) +
+      '"&gt;&lt;/script&gt;'
+    );
+
     plexiglass
       .style('display', 'block')
       .transition()
       .duration(300)
       .style('opacity', 1);
     close_modal.on('click', hideModal);
-  });
 
-  plexiglass.on('click', hideModal);
+  });
 
   function render() {
     update(model.get(), true);
