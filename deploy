@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DEPLOY="B:/bsouthga/child-insurance/"
+DEPLOYARR=("B:/bsouthga/child-insurance/ B:/childrens-health-coverage-at-risk/")
 
 mkdir -p dist
 
@@ -21,9 +21,16 @@ tar czfP ../tarball.tar.gz ./
 echo copying tarball...
 cd ../
 rm -rf dist/
-mv tarball.tar.gz "$DEPLOY"
 
-echo unzipping...
-cd "$DEPLOY"
-tar -xzf tarball.tar.gz
+STARTDIR=$(pwd)
+
+for DEPLOY in $DEPLOYARR; do
+  cd $STARTDIR
+  cp tarball.tar.gz "$DEPLOY"
+  echo unzipping...
+  cd "$DEPLOY"
+  tar -xzf tarball.tar.gz
+done;
+
 rm tarball.tar.gz
+
