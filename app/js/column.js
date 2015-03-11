@@ -175,7 +175,7 @@ ColumnChart.prototype.render = function(bar_data, line_data) {
 
   var yTitle = svg.append('text')
     .attr('class', 'y-axis-title')
-    .text('Uninsurance rate in 2016')
+    .text("Children's uninsurance rate, 2016")
     .attr('x', -m.left)
     .attr(
       'transform',
