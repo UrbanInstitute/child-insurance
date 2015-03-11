@@ -54,10 +54,11 @@ function ready(e, data) {
   var states = data["data/states.csv"];
   var incomes = data["data/incomes.csv"];
 
-  var max_max = Math.max(
+  // Y domain for both charts
+  var domain = [0, Math.max(
     d3.max(incomes, function(d) {return Number(d.rate);}),
     d3.max(states, function(d) {return Number(d.rate);})
-  );
+  )*1.1];
 
   // model starting with defaults
   var model = events(defaults).on('change', update);
@@ -68,9 +69,7 @@ function ready(e, data) {
     "container" : d3.select("#states"),
     "tooltip" : tooltip,
     "title" : "Marketplace",
-    "domain" : [
-      0, max_max*1.1
-    ],
+    "domain" : domain,
     "margin" : {"top" : 65},
     "brackets" : [
       {
@@ -87,11 +86,11 @@ function ready(e, data) {
       "values" : {
         "True" : {
           "color" : "rgb(29, 175, 236)",
-          "text" : "States with pre-existing S-CHIP program"
+          "text" : "States with preexisting CHIP program"
         },
         "False" : {
           "color" : "rgb(27,109,142)",
-          "text" : "States without pre-existing S-CHIP program"
+          "text" : "States without preexisting CHIP program"
         }
       }
     },
@@ -99,7 +98,7 @@ function ready(e, data) {
       {
         "format" : d3.format(".1%"),
         "variable" : "weight",
-        "text" : 'of all children'
+        "text" : 'of children'
       }
     ]
   });
@@ -108,18 +107,16 @@ function ready(e, data) {
     "container" : d3.select("#incomes"),
     "tooltip" : tooltip,
     "title" : "Income Level",
-    "domain" : [
-      0, max_max*1.1
-    ],
+    "domain" : domain,
     "xAxisRows" : [
       {
         "format" : d3.format(".1%"),
         "variable" : "weight",
-        "text" : 'of all children'
+        "text" : 'of children'
       },
       {
         "variable" : "col_name",
-        "text" : 'FPL'
+        "text" : 'of FPL'
       }
     ]
   });
