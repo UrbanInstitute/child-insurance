@@ -124,11 +124,14 @@ ul li {
 }
 
 .urban-button {
+  display: block;
   text-transform: uppercase;
   text-align: center;
   background-color: #ccc;
   padding: 8px 6px;
   cursor: pointer;
+  width: 100%;
+  text-decoration: none;
 }
 
 

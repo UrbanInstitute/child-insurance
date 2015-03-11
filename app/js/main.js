@@ -150,7 +150,7 @@ function ready(e, data) {
   d3.select('#embed').on('click', function() {
     d3.select('#code-example').html(
       '&lt;script src="http://datatools.urban.org/features/embed.js"' +
-      'data-viz="bsouthga/child-insurance?' +
+      'data-viz="childrens-health-coverage-at-risk?' +
       buildParameters(model.get()) +
       '"&gt;&lt;/script&gt;'
     );
