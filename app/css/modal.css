@@ -21,6 +21,7 @@
 .modal-body {
   display: block;
   max-height: 600px;
+  font-size: 10px;
   overflow-y: scroll;
 }
 
@@ -55,12 +56,12 @@
 
 .about-text{
   padding: 10px;
-  font-size: 11pt;
+  font-size: 10pt;
   margin-bottom: 0;
 }
 
 table.about-table {
-  font-size: 11pt;
+  font-size: 10pt;
   margin: 10px;
 }
 
