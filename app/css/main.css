@@ -116,7 +116,7 @@ ul li {
 }
 
 #github {
-  letter-spacing: 1pt;
+  letter-spacing: normal;
   font-size: 10px;
   font-style: italic;
 }
