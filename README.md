@@ -10,6 +10,6 @@ git clone https://github.com/UrbanInstitute/child-insurance.git
 run the "watch" script to start a browser and auto reload whenever you change (and save) a file.
 ```shell
 cd child-insurance
-sh ./watch
+sudo sh ./watch
 ```
 

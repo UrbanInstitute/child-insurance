@@ -106,13 +106,19 @@ ul li {
   right: 1px;
 }
 
-#credit a {
+#credit .homepage {
   text-decoration: none;
   color: inherit;
 }
 
 #urban {
   color: #1696d2;
+}
+
+#github {
+  letter-spacing: 1pt;
+  font-size: 10px;
+  font-style: italic;
 }
 
 .urban-toggle {
