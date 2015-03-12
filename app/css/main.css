@@ -1,9 +1,12 @@
-html, body {
+html,
+body {
   font-family: Lato;
   box-sizing: border-box;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
@@ -48,16 +51,17 @@ ul li {
   margin-top: 20px;
 }
 
-#states, #incomes {
+#states,
+#incomes {
   height: 300px;
 }
 
 #states .bar {
-  fill : rgb(29, 175, 236);
+  fill: rgb(29, 175, 236);
 }
 
 #incomes .bar {
-  fill : rgb(254, 202, 48);
+  fill: rgb(254, 202, 48);
 }
 
 #source {
@@ -65,7 +69,7 @@ ul li {
 }
 
 #charts {
-  margin : 0px;
+  margin: 0px;
   margin-top: 20px;
   white-space: nowrap;
   padding: 0px;
@@ -87,7 +91,28 @@ ul li {
 
 #change-scenarios {
   font-weight: bold;
-  margin-top:20px;
+  margin-top: 20px;
+}
+
+#credit {
+  float: right;
+  display: block;
+  font-weight: 900;
+  letter-spacing: 1.5pt;
+  text-align: right;
+  font-size: 0.8em;
+  position: fixed;
+  bottom: 1px;
+  right: 1px;
+}
+
+#credit a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#urban {
+  color: #1696d2;
 }
 
 .urban-toggle {
@@ -115,16 +140,17 @@ ul li {
 
 .urban-toggle .option.selected,
 .urban-button.selected {
-  background-color: rgb(29,175,236);
+  background-color: rgb(29, 175, 236);
 }
 
-.urban-button, label {
+.urban-button,
+label {
   font-size: 12px;
   font-weight: 400;
 }
 
 .urban-button {
-  display: block;
+  display: inline-block;
   text-transform: uppercase;
   text-align: center;
   background-color: #ccc;
@@ -134,16 +160,13 @@ ul li {
   text-decoration: none;
 }
 
-
 @media(max-width: 550px) {
   .chart {
     display: block;
     width: 100%;
   }
-
   #read-report {
     margin-top: 30px;
   }
 }
-
 
