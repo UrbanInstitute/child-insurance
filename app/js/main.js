@@ -86,11 +86,11 @@ function ready(e, data) {
       "values" : {
         "True" : {
           "color" : "rgb(29, 175, 236)",
-          "text" : "States with preexisting CHIP program"
+          "text" : "States with separate CHIP program"
         },
         "False" : {
           "color" : "rgb(27,109,142)",
-          "text" : "States without preexisting CHIP program"
+          "text" : "States without separate CHIP program"
         }
       }
     },
