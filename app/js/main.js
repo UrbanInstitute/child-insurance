@@ -132,11 +132,6 @@ function ready(e, data) {
   });
 
   /*
-    bind resize behavior
-  */
-  d3.select(window).on('resize', render);
-
-  /*
     bind modal behavior
   */
   d3.select('#about').on('click', function() {
